@@ -27,7 +27,12 @@ object NotificationUtil {
         }
     }
 
-    fun create(context: Context, id: Int, intent: Intent, contentTitle: String, contentText: String) {
+    fun create(context: Context, id: Int, intent: Intent, msg: String) {
+        val title = context.getString(R.string.app_name)
+        create(context, id,intent, title, msg)
+    }
+
+    fun create(context: Context, id: Int, intent: Intent, title: String, msg: String) {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Intent para disparar o broadcast
@@ -36,8 +41,8 @@ object NotificationUtil {
         // Cria a notification
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentIntent(p)
-                .setContentTitle(contentTitle)
-                .setContentText(contentText)
+                .setContentTitle(title)
+                .setContentText(msg)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(true)
 

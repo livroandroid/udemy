@@ -1,18 +1,19 @@
-package br.com.livroandroid.helloservice
+package br.com.livroandroid.helloservice.ex3
+
 import android.app.IntentService
-import android.app.PendingIntent
 import android.content.Intent
 import android.os.Looper
-import android.support.v4.app.NotificationCompat
 import android.util.Log
+import br.com.livroandroid.helloservice.MainActivity
+import br.com.livroandroid.helloservice.NotificationUtil
 
-class HelloService : IntentService("LivroAndroid") {
+class HelloIntentService : IntentService("LivroAndroid") {
     private var count: Int = 0
     private var running: Boolean = false
     // Constantes
     companion object {
         private const val MAX = 1000
-        private const val TAG = "udemy"
+        private const val TAG = "hello_service"
     }
 
     override fun onCreate() {
@@ -22,10 +23,11 @@ class HelloService : IntentService("LivroAndroid") {
 
     override fun onHandleIntent(intent: Intent?) {
         val mainThread  = Looper.myLooper() == Looper.getMainLooper()
-
-        Log.d(TAG, ">> HelloService.onHandleIntent() mainThread: $mainThread")
+        Log.d(TAG, ">> HelloService mainThread: $mainThread")
 
         running = true
+        count = 0
+
         while (running && count < MAX) {
             // Simula algum processamento
             Thread.sleep(1000)
@@ -36,7 +38,7 @@ class HelloService : IntentService("LivroAndroid") {
         Log.d(TAG, "<< HelloService.onHandleIntent()")
 
         val it = Intent(this, MainActivity::class.java)
-        NotificationUtil.create(this, 1, it, "Livro Android", "Fim do serviço.")
+        NotificationUtil.create(this, 1, it, "Fim do serviço.")
     }
 
     override fun onDestroy() {

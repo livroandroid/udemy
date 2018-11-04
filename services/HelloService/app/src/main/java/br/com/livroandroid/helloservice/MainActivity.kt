@@ -3,7 +3,8 @@ package br.com.livroandroid.helloservice
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
+import br.com.livroandroid.helloservice.ex2.HelloServiceThread
+import br.com.livroandroid.helloservice.ex3.HelloIntentService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         NotificationUtil.createChannel(this)
 
-        val cls = HelloService::class.java
+        val cls = HelloIntentService::class.java
 
         // Start
         btStart.setOnClickListener {

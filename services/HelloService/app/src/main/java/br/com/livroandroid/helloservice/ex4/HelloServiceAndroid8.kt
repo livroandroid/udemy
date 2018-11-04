@@ -1,10 +1,13 @@
-package br.com.livroandroid.helloservice
+package br.com.livroandroid.helloservice.ex4
 import android.app.IntentService
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Looper
 import android.support.v4.app.NotificationCompat
 import android.util.Log
+import br.com.livroandroid.helloservice.MainActivity
+import br.com.livroandroid.helloservice.NotificationUtil
+import br.com.livroandroid.helloservice.R
 
 class HelloServiceAndroid8 : IntentService("LivroAndroid") {
     private var count: Int = 0
@@ -12,7 +15,7 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
     // Constantes
     companion object {
         private const val MAX = 1000
-        private const val TAG = "udemy"
+        private const val TAG = "hello_service"
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -22,7 +25,7 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
         val pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0)
 
-        val notification = NotificationCompat.Builder(this,NotificationUtil.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, NotificationUtil.CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText("HelloService is running on background")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -43,7 +46,7 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
 
     override fun onHandleIntent(intent: Intent?) {
         val mainThread  = Looper.myLooper() == Looper.getMainLooper()
-        Log.d(TAG, ">> HelloService.onHandleIntent() mainThread: $mainThread")
+        Log.d(TAG, ">> HelloService mainThread: $mainThread")
 
         running = true
         while (running && count < MAX) {
@@ -53,9 +56,11 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
             count++
         }
         Log.d(TAG, "<< HelloService.onHandleIntent()")
+
         val it = Intent(this, MainActivity::class.java)
-//        NotificationUtil.create(this, 1, it, "Livro Android", "Fim do serviço.")
+        NotificationUtil.create(this, 1, it, "Fim do serviço.")
     }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "HelloService.onDestroy()")
