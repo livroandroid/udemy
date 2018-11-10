@@ -21,6 +21,7 @@
         <service android:name=".ex1.HelloService" android:exported="false" />
         <service android:name=".ex2.HelloServiceThread" android:exported="false" />
         <service android:name=".ex3.HelloIntentService" android:exported="false" />
+        <service android:name=".ex4.HelloServiceAndroid8" android:exported="false" />
     </application>
 
 </manifest>

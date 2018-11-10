@@ -32,15 +32,15 @@ class HelloService : Service() {
 
         running = true
 
-
+        doAsync {
+            fazerAlgo()
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "HelloService.onStartCommand() - startId: $startId")
 
-        Thread {
-            fazerAlgo()
-        }.start()
+
 
         return super.onStartCommand(intent, flags, startId)
     }

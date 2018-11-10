@@ -17,7 +17,7 @@ class HelloServiceThread : Service() {
 
     // Constantes
     companion object {
-        private const val MAX = 10
+        private const val MAX = 50
         private const val TAG = "hello_service"
     }
 
@@ -47,6 +47,7 @@ class HelloServiceThread : Service() {
         }
 
         private var count: Int = 0
+
         override fun run() {
             try {
                 while (running && count < MAX) {

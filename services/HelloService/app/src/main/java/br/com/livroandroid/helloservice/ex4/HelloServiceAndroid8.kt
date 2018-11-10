@@ -1,6 +1,7 @@
 package br.com.livroandroid.helloservice.ex4
 import android.app.IntentService
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Looper
 import android.support.v4.app.NotificationCompat
@@ -21,11 +22,11 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, ">> HelloService.onStartCommand()")
 
-        val notificationIntent = Intent(this, MainActivity::class.java)
+        val notificationIntent = Intent(getContext(), MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0)
 
-        val notification = NotificationCompat.Builder(this, NotificationUtil.CHANNEL_ID)
+        val notification = NotificationCompat.Builder(getContext(), NotificationUtil.CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText("HelloService is running on background")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -42,6 +43,10 @@ class HelloServiceAndroid8 : IntentService("LivroAndroid") {
     override fun onCreate() {
         Log.d(TAG, ">> HelloService.onCreate()")
         super.onCreate()
+    }
+
+    fun getContext(): Context {
+        return this
     }
 
     override fun onHandleIntent(intent: Intent?) {

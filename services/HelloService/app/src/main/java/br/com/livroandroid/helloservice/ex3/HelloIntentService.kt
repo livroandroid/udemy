@@ -12,7 +12,7 @@ class HelloIntentService : IntentService("LivroAndroid") {
     private var running: Boolean = false
     // Constantes
     companion object {
-        private const val MAX = 1000
+        private const val MAX = 100
         private const val TAG = "hello_service"
     }
 
@@ -34,6 +34,8 @@ class HelloIntentService : IntentService("LivroAndroid") {
             Log.d(TAG, "HelloService executando... $count")
             count++
         }
+
+//        stopSelf()
 
         Log.d(TAG, "<< HelloService.onHandleIntent()")
 
